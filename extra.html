@@ -10,4 +10,35 @@
   total += 90;
 
 console.log(total);
+
+// Demonstarate logical operators
+var a = 1;
+var b = 2;
+
+// AND operator needs both conditions to staisfy to true
+if(a === 1 && b === 2){
+  console.log('Both conditons are true')
+}
+
+//OR operator. this needs only one condition to evaluate to true
+if(a === 1 || b === 3){
+  console.log('Only one condition evaluates to true');
+}
+
+// Negation/NOT operator. condition that variables is not something.
+if(a !== 6){
+  console.log('a is NOT six');
+}
+
+// Nullish coalescing or null-aware operator.
+const myTest = "";
+
+const notFalsyTest = myTest || 'Hello World';
+console.log(notFalsyTest);  // Hello World
+
+const preservingFalsy = myTest ?? 'Hello, Universe';
+
+cosnole.log(preservingFalsy); //Hello World
+
 </script>
+
