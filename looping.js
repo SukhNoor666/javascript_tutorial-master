@@ -24,6 +24,6 @@ async function fetchAndDisplayUsers(){
   try {
     
   } catch (error) {
-    
+    console.error(`Error fetching data: ${error}`);
   }
 }
