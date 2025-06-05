@@ -1,7 +1,7 @@
 // array
 var array = ["This", "is", "my", "array", "being", "printed"];
 
-// Iterate through the array/collection
+// Iterate through the array collection
 for (let i = 0; i < array.length; i++) {
   console.log(array[i]);
 } //ouput: "This is my array begin printed"
@@ -26,7 +26,9 @@ async function fetchAndDisplayUsers(){
     const response = await fetch('https://jsonplaceholder.typicode.com/users')
     const users = await response.json();
 
-    //loop through the users object/collection/array
+    console.log(response);
+    console.log(users);
+    //loop through the users object collection array
     users.forEach((user) => {
       console.log(`Name: ${user.name}`);
       console.log(`Email: ${user.email}`);
@@ -39,3 +41,6 @@ async function fetchAndDisplayUsers(){
     console.error(`Error fetching data: ${error}`);
   }
 }
+
+// invoke the function
+fetchAndDisplayUsers();
