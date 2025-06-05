@@ -22,8 +22,20 @@ var array2 = [1, 2, 3, 4, 5];
 
 async function fetchAndDisplayUsers(){
   try {
-    
+    //fetch user data from teh api+
+    const response = await fetch('https://jsonplaceholder.typicode.com/users')
+    const users = await response.json();
+
+    //loop through the users object/collection/array
+    users.forEach((user) => {
+      console.log(`Name: ${user.name}`);
+      console.log(`Email: ${user.email}`);
+      console.log(`City: ${user.address.city}`);
+    } );
+
   } catch (error) {
+
+    // diplaying the error object to the user
     console.error(`Error fetching data: ${error}`);
   }
 }
