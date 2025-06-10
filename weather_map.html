@@ -1,72 +1,68 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" cnotent="width=device-width, inital-scale=1.0" />
-    <title>Red Deer Weather</title>
-    <script src="https://cdn.tailwindcss.com/"></script>
-  </head>
-  <body class="bg-blue-500 min-h-screen flex item-center justify-content p-4">
-    <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-      <h1 class="text-2xl font-bold text-center mb-6 text-gray-600">
-        Red Deer Weather
-      </h1>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Red Deer Weather</title>
+        <script src="https://cdn.tailwindcss.com/"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body class="bg-blue-500 min-h-screen flex item-center justify-content p-4">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
+            <h1 class="text-2xl font-bold text-center mb-6 text-gray-600">Red Deer Weather</h1>
+            
+            <!-- Loading placeholder when waiting on response from network-->
+             <div id="loading" class="text-center hidden">
+                 <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500">
+                 </div>
+                <p class="mt-2 text-gray-600">Loading...</p>
+             </div>
 
-      <!--Loading placeholder when waiting on response from network-->
+             <div id="weather" >
+                <div class="text-center mb-4">
+                    <i class="fa-solid fa-cloud"></i>
+                    <h2 id="temperature" class="text-4xl font-bold text-gray-800"></h2>
+                    <p id="description" class="text-lg text-gray-600 capitalize"></p>
+                </div>
+             
 
-      <div id="loading" class="text-center">
-        <div
-          class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"
-        ></div>
-        <p class="mt-2 text-grey-600">Loading...</p>
-      </div>
-      <div id="weather">
-        <div class="text-center mb-4">
-          <img id="weather-icon" class="w-16 h-16 mx-auto" alt="Weather Icon" />
-          <h2 id="emperature" class="text-4xl font-bold text-gray-800"></h2>
-          <p id="description" class="text-lg text-gray-600 capitalize"></p>
+             <div class="grid grid-cols-2 gap-4 mt-6">
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-sm text-gray-500">Feels like</p>
+                    <p id="feels-like" class="text-lg font-semibold"></p>
+                </div>
+             </div>
+
+
+             <div class="grid grid-cols-2 gap-4 mt-6">
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-sm text-gray-500">Humidity</p>
+                    <p id="humidity" class="text-lg font-semibold"></p>
+                </div>
+             </div>
+
+             
+             <div class="grid grid-cols-2 gap-4 mt-6">
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-sm text-gray-500">Wind Speed</p>
+                    <p id="wind-speed" class="text-lg font-semibold"></p>
+                </div>
+             </div>
+
+            <div class="grid grid-cols-2 gap-4 mt-6">
+                <div class="bg-gray-50 p-3 rounded">
+                    <p class="text-sm text-gray-500">Pressure</p>
+                    <p id="pressure" class="text-lg font-semibold"></p>
+                </div>
+             </div>
+            </div>
+            <div id="error" class="hidden text-center text-red-600">
+                <p>Unable to load data.</p>
+                <p class="text-sm mt-2">Please check your internet connection or try again later.</p>
+            </div>
+
+            <button onclick="loadWeather()" class="w-full mt-6 bg-blue-500 hover:bg-blue-600
+            text-white font-semibold py-2 px-4 rounded transition duration-200 ">Refresh Weather</button>
         </div>
-
-        <div class="grid grid-cols-2 gap-4 mt-6">
-          <div class="bg-gray-50 p-3 rounded">
-            <p class="text-sm text-gray-500">Feels like</p>
-            <p id="feels-like" class="text-lg font-semibold"></p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 mt-6">
-          <div class="bg-gray-50 p-3 rounded">
-            <p class="text-sm text-gray-500">Humidity</p>
-            <p id="humidity" class="text-lg font-semibold"></p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 mt-6">
-          <div class="bg-gray-50 p-3 rounded">
-            <p class="text-sm text-gray-500">Wind Speed</p>
-            <p id="wind-speed" class="text-lg font-semibold"></p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 mt-6">
-          <div class="bg-gray-50 p-3 rounded">
-            <p class="text-sm text-gray-500">Pressure</p>
-            <p id="pressure" class="text-lg font-semibold"></p>
-          </div>
-        </div>
-      </div>
-      <div id="error" class="hidden text-center text-red-600">
-        <p>Unable to load data.</p>
-        <p class="text-sm mt-2">
-          Please check your internet connection or try again later.
-        </p>
-      </div>
-      <button
-        onclick="loadWeather()"
-        class="w-full mt-6 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-200"
-      >
-        Refresh Weather
-      </button>
-    </div>
-  </body>
+    </body>
 </html>
