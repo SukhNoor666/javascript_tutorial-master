@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div id="error" class="hidden text-center text-red-600">
+      <div id="error" class="text-center text-red-600 hidden">
         <p>Unable to load data.</p>
         <p class="text-sm mt-2">
           Please check your internet connection or try again later.
@@ -108,8 +108,22 @@
           document.getElementById("humidity").textContent = `${data.main.humidity}%`;
           document.getElementById("wind-speed").textContent = `${data.wind.speed}`;
           document.getElementById("pressure").textContent = `${data.main.pressure}`;
-        } catch (error) {}
+
+          //show the weather, hide loading
+          loading.classList.add('hidden');
+          weather.classList.remove('hidden');
+          error.classList.add('hidden');
+          
+        } catch (error) {
+            //show error
+            loading.classList.add('hidden');
+            error.classList.remove('hidden');
+            console.error(`Error loading weather: ${error}`);
+        }
       }
+
+      //load the weather
+      loadWeather();
     </script>
   </body>
 </html>
